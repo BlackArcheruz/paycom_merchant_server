@@ -37,8 +37,9 @@ module.exports = class HomeController {
          * If you want to send error about invalid account
             res.error.invalidAccount(res);
          */
-	res.error.invalidAmount(res);
 	res.error.invalidAccount(res);
+	res.error.invalidAmount(res);
+	
 		res.json({
 			result: {
 				allow: true,
