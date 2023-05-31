@@ -37,18 +37,13 @@ module.exports = class HomeController {
          * If you want to send error about invalid account
             res.error.invalidAccount(res);
          */
-	if(!account){
 	res.error.invalidAccount(res);
-	}
-	if(!amount){
 	res.error.invalidAmount(res);
-	}else{
 		res.json({
 			result: {
 				allow: true,
 			},
 		});
-	}
 	}
 
 	static async CreateTransaction(req, res) {
@@ -96,12 +91,8 @@ module.exports = class HomeController {
 				},
 			});
 		} catch (error) {
-			if(!amount){
 			res.error.invalidAmount(res);
-			}
-			if(!account){
 			res.error.invalidAccount(res);
-			}
 			res.error.cantDoOperation(res);
 		}
 	}
