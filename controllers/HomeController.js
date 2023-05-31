@@ -91,8 +91,9 @@ module.exports = class HomeController {
 				},
 			});
 		} catch (error) {
-			res.error.invalidAmount(res);
+			
 			res.error.invalidAccount(res);
+			res.error.invalidAmount(res);
 			res.error.cantDoOperation(res);
 		}
 	}
