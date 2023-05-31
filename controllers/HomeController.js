@@ -43,8 +43,7 @@ module.exports = class HomeController {
 
 	static async CreateTransaction(req, res) {
 		try {
-		    res.error.invalidAmount(res);
-            res.error.invalidAccount(res);
+
 
 			const user = await req.db.users.findOne({
 				where: {
@@ -83,11 +82,13 @@ module.exports = class HomeController {
 			});
 		} catch (error) {
 			res.error.cantDoOperation(res);
+			res.error.invalidAmount(res);
+           	 	res.error.invalidAccount(res);
 		}
 	}
 
 	static async CheckTransaction(req, res) {
-		    res.error.transactionNotFound(res);
+	try{
 
 		const payment = await req.db.payments.findOne({
 			where: {
@@ -116,6 +117,10 @@ module.exports = class HomeController {
 				reason: payment.dataValues.payment_reason,
 			},
 		});
+	   }
+	catch(error){
+		res.error.transactionNotFound(res);
+	}
 	}
 
 	static async PerformTransaction(req, res) {
