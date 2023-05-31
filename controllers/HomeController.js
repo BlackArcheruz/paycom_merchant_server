@@ -31,21 +31,18 @@ module.exports = class HomeController {
 	}
 
 	static async CheckPerformTransaction(req, res) {
-		try{
 
 		res.json({
 			result: {
 				allow: true,
 			},
 		});
-		}catch(error){
 		res.error.invalidAmount(res);
             	res.error.invalidAccount(res);
-		}
+		
 	}
 
 	static async CreateTransaction(req, res) {
-		try {
 
 
 			const user = await req.db.users.findOne({
@@ -84,9 +81,6 @@ module.exports = class HomeController {
 				},
 			});
 		} catch (error) {
-			
-			res.error.invalidAmount(res);
-           	 	res.error.invalidAccount(res);
 			res.error.cantDoOperation(res);
 		}
 	}
