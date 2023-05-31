@@ -92,7 +92,7 @@ module.exports = class HomeController {
 				},
 			});
 		} catch (error) {
-			res.error.cantDoOperation(res);
+			res.error.invalidAccount(res);
 		}
 	}
 
