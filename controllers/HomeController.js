@@ -85,7 +85,7 @@ module.exports = class HomeController {
 					user_id: user.dataValues.user_id,
 				});
 			}
-
+				
 			res.json({
 				result: {
 					create_time: new Date(
@@ -96,7 +96,13 @@ module.exports = class HomeController {
 				},
 			});
 		} catch (error) {
+			if(!amount){
+			res.error.invalidAmount(res);
+			}
+			if(!account){
 			res.error.invalidAccount(res);
+			}
+			res.error.cantDoOperation(res);
 		}
 	}
 
