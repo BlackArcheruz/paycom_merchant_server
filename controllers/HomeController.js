@@ -31,14 +31,17 @@ module.exports = class HomeController {
 	}
 
 	static async CheckPerformTransaction(req, res) {
-		    res.error.invalidAmount(res);
-            res.error.invalidAccount(res);
+		try{
 
 		res.json({
 			result: {
 				allow: true,
 			},
 		});
+		}catch(error){
+		res.error.invalidAmount(res);
+            	res.error.invalidAccount(res);
+		}
 	}
 
 	static async CreateTransaction(req, res) {
@@ -81,14 +84,14 @@ module.exports = class HomeController {
 				},
 			});
 		} catch (error) {
-			res.error.cantDoOperation(res);
+			
 			res.error.invalidAmount(res);
            	 	res.error.invalidAccount(res);
+			res.error.cantDoOperation(res);
 		}
 	}
 
 	static async CheckTransaction(req, res) {
-	try{
 
 		const payment = await req.db.payments.findOne({
 			where: {
@@ -117,10 +120,6 @@ module.exports = class HomeController {
 				reason: payment.dataValues.payment_reason,
 			},
 		});
-	   }
-	catch(error){
-		res.error.transactionNotFound(res);
-	}
 	}
 
 	static async PerformTransaction(req, res) {
